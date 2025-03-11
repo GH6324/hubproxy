@@ -9,7 +9,7 @@
 - 超级轻量级
 - 简单方便
 - 自动配置HTTPS
-
+- 增加代理脚本中的资源
 ---
 
 ### 使用Docker部署
@@ -60,6 +60,13 @@ docker run -d \
 
 ![预览](./.github/workflows/gh.jpg)
 
+
+
+
+#### 代理脚本中的资源
+```
+bash <(curl -Ls https://example.com/https://raw.githubusercontent.com/test/shell/master/install.sh | perl -pe "s#(http.*?git[^/]*?/)#https://example.com/\1#g")
+```
 
 ---
 
