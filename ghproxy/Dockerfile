@@ -1,18 +1,27 @@
-FROM golang:1.22.5-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
-COPY go.mod go.sum ./
-RUN go mod download
 
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
-FROM alpine:3.20
+ARG VERSION=2.5.0
 
-WORKDIR /root/
+RUN CGO_ENABLED=0 go build -ldflags "-X main.version=${VERSION} -X main.dev=true" -o main ./main.go
 
-COPY --from=builder /app/main .
-COPY --from=builder /app/config.json .
-COPY --from=builder /app/public ./public
+FROM alpine:latest
 
-CMD ["./main"]
+RUN apk --no-cache add ca-certificates curl
+
+WORKDIR /data
+
+COPY --from=builder /app/main /data/
+
+RUN mkdir -p ghproxy/config ghproxy/log www \
+    && touch ghproxy/log/run.log
+
+COPY --from=builder /app/config /data/ghproxy/config/
+
+
+RUN chmod +x /data/main
+
+CMD ["/data/main", "-cfg", "/data/ghproxy/config/config.toml"]
