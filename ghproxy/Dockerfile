@@ -10,7 +10,7 @@ RUN CGO_ENABLED=0 go build -ldflags "-s -w -X main.version=${VERSION}" -o main .
 
 FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates curl
+RUN apk add --no-cache curl
 
 WORKDIR /data
 
