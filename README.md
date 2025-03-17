@@ -18,7 +18,7 @@
 
 2：拉取本项目
 ```
-git clone https://github.com/sky22333/hub-proxy.git
+git clone -b dev https://github.com/sky22333/hub-proxy.git
 ```
 
 
