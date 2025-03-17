@@ -45,9 +45,10 @@ docker compose up -d
 ```
 docker run -d \
   --name ghproxy \
-  -p 5000:5000 \
   --restart always \
-  ghcr.io/sky22333/hub-proxy
+  -p 5000:5000 \
+  -v ./config:/data/ghproxy/config \
+  ghcr.io/sky22333/hub-proxy:dev
 ```
 
 ---

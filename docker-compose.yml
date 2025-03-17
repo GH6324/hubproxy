@@ -50,4 +50,6 @@ services:
     build:
       context: ./ghproxy
     container_name: "ghproxy"
+    volumes:
+      - "./config:/data/ghproxy/config"
     restart: "always"
