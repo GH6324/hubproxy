@@ -6,7 +6,7 @@ COPY . .
 
 ARG VERSION=2.5.0
 
-RUN CGO_ENABLED=0 go build -ldflags "-X main.version=${VERSION} -X main.dev=true" -o main ./main.go
+RUN CGO_ENABLED=0 go build -ldflags "-s -w -X main.version=${VERSION}" -o main ./main.go
 
 FROM alpine:latest
 
@@ -17,11 +17,8 @@ WORKDIR /data
 COPY --from=builder /app/main /data/
 
 RUN mkdir -p ghproxy/config ghproxy/log www \
-    && touch ghproxy/log/run.log
+    && chmod +x /data/main
 
 COPY --from=builder /app/config /data/ghproxy/config/
-
-
-RUN chmod +x /data/main
 
 CMD ["/data/main", "-cfg", "/data/ghproxy/config/config.toml"]

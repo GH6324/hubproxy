@@ -4,12 +4,10 @@
 - `docker`镜像默认缓存3天（可自行修改）
 - 支持`github`文件加速
 - 支持`api.github.com`
-- 支持Al模型库Hugging Face
-- 支持docker-ce官方压缩包下载
 - 超级轻量级
 - 简单方便
 - 自动配置HTTPS
-- 增加代理脚本中的资源
+- 支持脚本嵌套加速
 ---
 
 ### 使用Docker部署
@@ -17,7 +15,6 @@
 1：域名解析：将`hub`，`quay`，`ghcr`，`gcr`，`docker`，`k8s`这个几个解析为你的二级域名。
 
 > 嫌麻烦也可以直接泛解析
-
 
 2：拉取本项目
 ```
@@ -61,18 +58,11 @@ docker run -d \
 ![预览](./.github/workflows/gh.jpg)
 
 
-
-
-#### 代理脚本中的资源
-```
-bash <(curl -Ls https://example.com/https://raw.githubusercontent.com/test/shell/master/install.sh | perl -pe "s#(http.*?git[^/]*?/)#https://example.com/\1#g")
-```
-
 ---
 
 #### 鸣谢：
 
-ghproxy项目使用了[WJQSERVER-STUDIO](https://github.com/WJQSERVER-STUDIO/ghproxy)的代码，镜像加速基于`registry`
+ghproxy项目引用于[WJQSERVER-STUDIO](https://github.com/WJQSERVER-STUDIO/ghproxy)，镜像加速基于`registry`
 
 ### 免责声明
 

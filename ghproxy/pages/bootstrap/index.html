@@ -386,7 +386,7 @@
         </div>
         <div class="tips">
             <div class="tips-content">
-                <p>支持release、archive文件，支持git clone、wget、curl等等操作<br>支持Al模型库Hugging Face</p><br>
+                <p>支持release、archive文件，支持git clone、wget、curl等等操作<br>支持远程脚本嵌套加速</p><br>
             </div>
         </div>
 
@@ -475,8 +475,6 @@
                 link.startsWith("github.com/") || 
                 link.startsWith("raw.githubusercontent.com/") || 
                 link.startsWith("gist.githubusercontent.com/") ||
-                link.startsWith("huggingface.co/") ||
-                link.startsWith("cdn-lfs.hf.co/") ||
                 link.startsWith("download.docker.com/")
             ) {
                 formattedLink = "https://" + currentHost + "/https://" + link;

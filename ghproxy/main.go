@@ -141,7 +141,8 @@ func setupPages(cfg *config.Config, router *gin.Engine) {
 		// 设置嵌入式资源路由
 		router.GET("/", gin.WrapH(http.FileServer(http.FS(pages))))
 		router.GET("/favicon.ico", gin.WrapH(http.FileServer(http.FS(pages))))
-		router.GET("/bj.svg", gin.WrapH(http.FileServer(http.FS(pages))))
+		router.GET("/script.js", gin.WrapH(http.FileServer(http.FS(pages))))
+		router.GET("/style.css", gin.WrapH(http.FileServer(http.FS(pages))))
 		//router.GET("/bootstrap.min.css", gin.WrapH(http.FileServer(http.FS(pages))))
 
 	case "external":
