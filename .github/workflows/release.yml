@@ -16,12 +16,12 @@ jobs:
       
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           
       - name: 设置Go环境
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version-file: "src/go.mod"
           cache-dependency-path: "src/go.sum"
@@ -55,7 +55,7 @@ jobs:
           mkdir -p build/hubproxy
           
       - name: 安装 UPX
-        uses: crazy-max/ghaction-upx@v3
+        uses: crazy-max/ghaction-upx@v4
         with:
           install-only: true
 
@@ -118,7 +118,7 @@ jobs:
           cat checksums.txt
           
       - name: 创建或更新Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.version.outputs.version }}
           name: "HubProxy ${{ steps.version.outputs.version }}"

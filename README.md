@@ -202,7 +202,7 @@ defaultTTL = "20m"
 
 </details>
 
-容器内的配置文件位于 `/root/config.toml`
+容器内的配置文件位于 `/app/config.toml`
 
 脚本部署配置文件位于 `/opt/hubproxy/config.toml`
 
@@ -211,6 +211,7 @@ defaultTTL = "20m"
 支持通过环境变量覆盖部分配置，优先级高于`config.toml`，以下是默认值：
 
 ```
+CONFIG_PATH=config.toml          # 配置文件路径
 SERVER_HOST=0.0.0.0             # 监听地址
 SERVER_PORT=5000                # 监听端口
 ENABLE_H2C=false                # 是否启用 H2C
@@ -221,6 +222,7 @@ RATE_PERIOD_HOURS=3             # 限流周期（小时）
 IP_WHITELIST=127.0.0.1,192.168.1.0/24   # IP 白名单（逗号分隔）
 IP_BLACKLIST=192.168.100.1,192.168.100.0/24 # IP 黑名单（逗号分隔）
 MAX_IMAGES=10                   # 批量下载镜像数量限制
+ACCESS_PROXY=                   # 代理配置，例如 socks5://127.0.0.1:1080
 ```
 
 为了IP限流能够正常运行，反向代理需要传递IP头用来获取访客真实IP，以caddy为例：
