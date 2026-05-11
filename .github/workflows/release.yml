@@ -114,12 +114,17 @@ jobs:
             config="$4"
             target="build/packages/hubproxy-linux-${hubproxy_arch}.${packager}"
             temp_dir="build/packages/${hubproxy_arch}-${packager}"
+            binary="./build/hubproxy/hubproxy-linux-${hubproxy_arch}"
 
             rm -rf "${temp_dir}"
             mkdir -p "${temp_dir}"
-            HUBPROXY_ARCH="${hubproxy_arch}" NFPM_ARCH="${nfpm_arch}" NFPM_VERSION="${NFPM_VERSION}" nfpm package --config "${config}" --packager "${packager}" --target "${temp_dir}/"
+            rm -rf build/package-root
+            mkdir -p build/package-root
+            cp "${binary}" build/package-root/hubproxy
+            NFPM_ARCH="${nfpm_arch}" NFPM_VERSION="${NFPM_VERSION}" nfpm package --config "${config}" --packager "${packager}" --target "${temp_dir}/"
             mv "${temp_dir}"/*.${packager} "${target}"
             rm -rf "${temp_dir}"
+            rm -rf build/package-root
           }
 
           # AMD64 包

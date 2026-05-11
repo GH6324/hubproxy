@@ -14,7 +14,7 @@ depends:
   - logrotate
 
 contents:
-  - src: ./build/hubproxy/hubproxy-linux-${HUBPROXY_ARCH}
+  - src: ./build/package-root/hubproxy
     dst: /usr/bin/hubproxy
     file_info:
       mode: 0755
