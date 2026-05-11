@@ -40,19 +40,35 @@ docker run -d \
   ghcr.io/sky22333/hubproxy
 ```
 
-### 一键脚本安装
+### 脚本安装
+
+自动识别系统与架构，从 GitHub Releases 下载对应的 `.deb`、`.rpm` 或 `.apk` 安装包：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sky22333/hubproxy/main/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/sky22333/hubproxy/main/install.sh | sudo sh
 ```
 
-支持单个二进制文件直接启动，无需其他配置，内置默认配置，支持所有功能。
+安装包会自动安装并启动 `hubproxy` 服务。
 
-这个脚本会：
-- 自动检测系统架构（AMD64/ARM64）
-- 从 GitHub Releases 下载最新版本
-- 自动配置系统服务
-- 保留现有配置（升级时）
+```bash
+# systemd 系统
+sudo systemctl status hubproxy
+sudo systemctl restart hubproxy
+
+# Alpine / OpenRC 系统
+sudo rc-service hubproxy status
+sudo rc-service hubproxy restart
+```
+
+### 文件路径
+
+- Docker 容器配置文件：`/app/config.toml`
+- Linux 安装包配置文件：`/etc/hubproxy/config.toml`
+- Linux 安装包二进制文件：`/usr/bin/hubproxy`
+- systemd 服务文件：`/lib/systemd/system/hubproxy.service`
+- Alpine OpenRC 服务文件：`/etc/init.d/hubproxy`
+- Alpine 日志文件：`/var/log/hubproxy.log`
+- Alpine 日志轮转配置：`/etc/logrotate.d/hubproxy`
 
 ## 使用方法
 
@@ -201,10 +217,6 @@ defaultTTL = "20m"
 ```
 
 </details>
-
-容器内的配置文件位于 `/app/config.toml`
-
-脚本部署配置文件位于 `/opt/hubproxy/config.toml`
 
 ### 环境变量（可选）
 
