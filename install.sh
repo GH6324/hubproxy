@@ -92,7 +92,7 @@ install_package() {
 }
 
 if [ "$(id -u)" -ne 0 ]; then
-    fail "请使用 root 权限运行，例如：curl -fsSL https://raw.githubusercontent.com/${REPO}/main/install.sh | sudo sh"
+    fail "请使用 root 权限运行"
 fi
 
 need_cmd curl

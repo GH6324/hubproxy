@@ -45,7 +45,7 @@ docker run -d \
 自动识别系统与架构，从 GitHub Releases 下载对应的 `.deb`、`.rpm` 或 `.apk` 安装包：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sky22333/hubproxy/main/install.sh | sudo sh
+curl -fsSL https://raw.githubusercontent.com/sky22333/hubproxy/main/install.sh | sh
 ```
 
 安装包会自动安装并启动 `hubproxy` 服务。
