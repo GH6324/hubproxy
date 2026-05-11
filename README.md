@@ -50,19 +50,54 @@ curl -fsSL https://raw.githubusercontent.com/sky22333/hubproxy/main/install.sh |
 
 安装包会自动安装并启动 `hubproxy` 服务。
 
+<details>
+  <summary>服务管理命令</summary>
+
+#### systemd（Debian / Ubuntu / RHEL / CentOS / Fedora）
+
 ```bash
-# systemd 系统
+# 查看状态
 sudo systemctl status hubproxy
+
+# 重启服务
 sudo systemctl restart hubproxy
 
-# Alpine / OpenRC 系统
-sudo rc-service hubproxy status
-sudo rc-service hubproxy restart
+# 查看实时日志
+sudo journalctl -u hubproxy -f
+
+# 编辑配置文件
+sudo nano /etc/hubproxy/config.toml
+
+# 卸载服务
+sudo apt remove hubproxy
+
+# 连配置一起清理
+sudo apt purge hubproxy
 ```
+
+#### OpenRC（Alpine Linux）
+
+```bash
+# 查看状态
+sudo rc-service hubproxy status
+
+# 重启服务
+sudo rc-service hubproxy restart
+
+# 查看实时日志
+sudo tail -f /var/log/hubproxy.log
+
+# 编辑配置文件
+sudo vi /etc/hubproxy/config.toml
+
+# 卸载
+sudo apk del hubproxy
+```
+
+</details>
 
 ### 文件路径
 
-- Docker 容器配置文件：`/app/config.toml`
 - Linux 安装包配置文件：`/etc/hubproxy/config.toml`
 - Linux 安装包二进制文件：`/usr/bin/hubproxy`
 - systemd 服务文件：`/lib/systemd/system/hubproxy.service`
